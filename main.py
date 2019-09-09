@@ -6,7 +6,7 @@ cred = credentials.Certificate("Key/ServiceAccountKey.json")
 app = firebase_admin.initialize_app(cred)
 
 store = firestore.client()
-doc_ref = store.collection(u'Emails').limit(2)
+doc_ref = store.collection(u'Emails').limit(5)
 # doc_ref = store.collection(u'test')
 # doc_ref.add({u'name': u'test', u'added': u'just now'})
 
