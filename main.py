@@ -76,7 +76,7 @@ def runtime(filepath):
             for address in [elem.lower() for elem in email]:
                 if('%20' in address):
                   address = address.replace('%20','')
-                doc_ref.add({'business': row['business_name'], 'website': row['website'], 'industry': row['industry'], 'city': row['city'], 'state': row['state'], 'email': address, 'contactDate': dt_string, 'substatus': True })
+                doc_ref.add({'business': row['business_name'], 'website': row['website'], 'industry': row['industry'], 'city': row['city'], 'state': row['state'], 'email': address, 'contactDate': 'N/A', 'substatus': True, 'uploadDate': dt_string })
             counter += len(email)
         # How many emails do you want? Set to 9999 for all.
         if(counter >= 9999):
