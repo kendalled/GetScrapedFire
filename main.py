@@ -16,7 +16,6 @@ app = firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 doc_ref = db.collection(u'Emails')
-batch = db.batch()
 
 # Negative Email Endings
 negatives = ['domain.net','group.calendar.google','youremail.com','sample.com','yoursite.com','internet.com','companysite.com','sentry.io','domain.xxx','sentry.wixpress.com', 'example.com', 'domain.com', 'address.com', 'xxx.xxx', 'email.com', 'yourdomain.com']
@@ -67,7 +66,7 @@ def runtime(filepath):
     df = pd.read_csv(filepath)
     counter = 0
     total_counter = 0
-
+    batch = db.batch()
     # Only appends businesses with valid email
     for index, row in df.iterrows():
         email = get_email(row['website'])
@@ -78,13 +77,14 @@ def runtime(filepath):
             for address in [elem.lower() for elem in email]:
                 if('%20' in address):
                   address = address.replace('%20','')
-                new_doc = db.collection('Emails').document()
+                new_doc = doc_ref.document()
                 batch.set(new_doc, {'business': row['business_name'], 'website': row['website'], 'industry': row['industry'], 'city': row['city'], 'state': row['state'], 'email': address, 'contactDate': 'N/A', 'substatus': True, 'uploadDate': dt_string })
             counter += len(email)
             total_counter += len(email)
 
-        if(counter >= 475):
+        if(counter >= 225):
           batch.commit()
+          print('Commiting ' + str(counter) + ' emails.')
           counter = 0
         # Printing Status
         print('------------------------')
