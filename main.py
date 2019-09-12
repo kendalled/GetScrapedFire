@@ -82,7 +82,7 @@ def runtime(filepath):
             counter += len(email)
             total_counter += len(email)
 
-        if(counter >= 22):
+        if(counter >= 225):
           batch.commit()
           print('Commiting ' + str(counter) + ' emails.')
           batch = db.batch()
