@@ -73,7 +73,7 @@ def runtime(filepath):
         if(email):
             now = datetime.now()
  
-            dt_string = now.strftime('%d/%m/%Y %H:%M')
+            dt_string = now.strftime('%m/%d/%Y')
             for address in [elem.lower() for elem in email]:
                 if('%20' in address):
                   address = address.replace('%20','')
