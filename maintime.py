@@ -11,7 +11,7 @@ import pandas as pd
 from glob import glob
 
 # define the writing time
-startTime = datetime.time(11, 0, 0)
+startTime = datetime.time(18, 0, 0)
 endTime = datetime.time(18, 10, 0)
 
 # Credentials and Firestore Reference
