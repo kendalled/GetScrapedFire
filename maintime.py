@@ -36,7 +36,7 @@ def isOpen(startTime, endTime, x):
 
 # function to commit in batches to firebase
 def commit_data(data):
-  n = 25
+  n = 400
   # List comprehension to break up into chunks
   chunked_array = [data[i * n:(i + 1) * n] for i in range((len(data) + n - 1) // n )]
 
@@ -113,7 +113,7 @@ def runtime(filepath):
 
             total_counter += len(email)
             
-        if (isOpen(startTime, endTime, currentTime) and len(final_list) >= 75):
+        if (isOpen(startTime, endTime, currentTime) and len(final_list) >= 400):
           commit_data(final_list)
           final_list = []
         else:
