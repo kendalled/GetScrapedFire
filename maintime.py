@@ -11,7 +11,7 @@ import pandas as pd
 from glob import glob
 
 # define the writing time
-startTime = datetime.time(18, 0, 0)
+startTime = datetime.time(11, 0, 0)
 endTime = datetime.time(18, 10, 0)
 
 # Credentials and Firestore Reference
@@ -36,7 +36,7 @@ def isOpen(startTime, endTime, x):
 
 # function to commit in batches to firebase
 def commit_data(data):
-  n = 425
+  n = 25
   # List comprehension to break up into chunks
   chunked_array = [data[i * n:(i + 1) * n] for i in range((len(data) + n - 1) // n )]
 
@@ -113,7 +113,7 @@ def runtime(filepath):
 
             total_counter += len(email)
             
-        if (isOpen(startTime, endTime, currentTime) and len(final_list) >= 475):
+        if (isOpen(startTime, endTime, currentTime) and len(final_list) >= 75):
           commit_data(final_list)
           final_list = []
         else:
