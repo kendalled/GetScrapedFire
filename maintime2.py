@@ -12,8 +12,8 @@ from glob import glob
 import time
 
 # define the writing time
-startTime = datetime.time(18, 0, 0)
-endTime = datetime.time(18, 10, 0)
+startTime = datetime.time(18, 10, 0)
+endTime = datetime.time(18, 20, 0)
 
 # Credentials and Firestore Reference
 cred = credentials.Certificate('Key/ServiceAccountKey.json')
