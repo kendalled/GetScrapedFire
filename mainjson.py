@@ -16,8 +16,8 @@ def obj_dict(obj):
     return obj.__dict__
 
 # define the writing time
-startTime = datetime.time(6, 0, 0)
-endTime = datetime.time(6, 10, 0)
+startTime = datetime.time(12, 0, 0)
+endTime = datetime.time(13, 10, 0)
 
 # Credentials and Firestore Reference
 cred = credentials.Certificate('Key/ServiceAccountKey.json')
@@ -39,7 +39,7 @@ def isOpen(startTime, endTime, x):
     else:
         return startTime <= x or x <= endTime
 
-# TODO function to commit JSON in batches to firebase
+# Function to commit JSON in batches to firebase
 def commit_data(data):
   n = 400
   # List comprehension to break up into chunks
@@ -119,16 +119,11 @@ def runtime(filepath):
 
             total_counter += len(email)
             
-        if isOpen(startTime, endTime, currentTime):
-          commit_data(final_list)
-          final_list = []
-        else:
-          print('Not writing time')
-
-        if(len(final_list) >= 2000):
+        if(len(final_list) >= 2300):
            # Writing to JSON
-            with open(fileName, 'w') as f:
-              json.dump(final_list, f, default=obj_dict, indent=2)
+          with open(fileName, 'w') as f:
+            json.dump(final_list, f, default=obj_dict, indent=2)
+          break  
           
         # Printing Status
         print('------------------------')
@@ -140,9 +135,17 @@ def runtime(filepath):
     print('File written! Kendall is the best. On to the next city!')
 
 for entry in glob('./Data/*.csv'):
-    try:
-      runtime(entry)
-    except KeyboardInterrupt:
-      continue
+  if isOpen(startTime, endTime, currentTime):
+    for file_name in glob('./Output/*.json'):
+      with open(file_name, 'r') as f:
+        data = json.load(f)
+        commit_data(data)
+  else:
+    print('Not writing time')
+  # Actual Scraping
+  try:
+    runtime(entry)
+  except KeyboardInterrupt:
+    continue
 
 print('Finished all files.')
