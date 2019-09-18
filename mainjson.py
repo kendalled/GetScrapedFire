@@ -98,7 +98,7 @@ def runtime(filepath):
 
     # Reads website column, initializes counter variable
     df = pd.read_csv(filepath)
-    fileName = './Output/' + filepath[filepath.find('/Data/')+6:filepath.find('.csv')] + '-EMAILS.csv'
+    fileName = './Output/' + filepath[filepath.find('/Data/')+6:filepath.find('.csv')] + '-EMAILS.json'
     total_counter = 0
     # Initialize final list
     final_list = []
