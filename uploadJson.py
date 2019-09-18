@@ -14,7 +14,6 @@ app = firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 doc_ref = db.collection(u'Emails')
-batch = db.batch()
 
 # Function to commit JSON in batches to firebase
 def commit_data(data):
