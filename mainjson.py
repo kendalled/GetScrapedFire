@@ -119,7 +119,7 @@ def runtime(filepath):
 
             total_counter += len(email)
             
-        if(len(final_list) >= 2300):
+        if(len(final_list) >= 3500):
            # Writing to JSON
           with open(fileName, 'w') as f:
             json.dump(final_list, f, default=obj_dict, indent=2)
@@ -130,7 +130,9 @@ def runtime(filepath):
         print(str(total_counter) + ' Email(s) found so far.')
         print('------------------------')
     
-
+    # Writing to JSON
+    with open(fileName, 'w') as f:
+      json.dump(final_list, f, default=obj_dict, indent=2)
     print('File written! Kendall is the best. On to the next city!')
 
 for entry in glob('./Data/*.csv'):
