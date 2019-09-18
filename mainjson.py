@@ -130,7 +130,7 @@ def runtime(filepath):
         print(str(total_counter) + ' Email(s) found so far.')
         print('------------------------')
     
-    # Writing to JSON
+    # Writing to JSON (If list small but complete)
     with open(fileName, 'w') as f:
       json.dump(final_list, f, default=obj_dict, indent=2)
     print('File written! Kendall is the best. On to the next city!')
