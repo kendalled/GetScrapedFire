@@ -122,11 +122,11 @@ def runtime(filepath):
 
             total_counter += len(email)
             
-        if(len(final_list) >= 3500):
-           # Writing to JSON
-          with open(fileName, 'w') as f:
-            json.dump(final_list, f, default=obj_dict, indent=2)
-          break  
+        # if(len(final_list) >= 3500):
+        #    # Writing to JSON
+        #   with open(fileName, 'w') as f:
+        #     json.dump(final_list, f, default=obj_dict, indent=2)
+        #   break  
           
         # Printing Status
         print('------------------------')
