@@ -2,9 +2,9 @@
 # github.com/kendalled
 # Firebase Edition (Time Based)
 import datetime
-import firebase_admin
-import google.cloud
-from firebase_admin import credentials, firestore
+#import firebase_admin
+#import google.cloud
+#from firebase_admin import credentials, firestore
 import requests
 import re
 import pandas as pd
@@ -16,16 +16,19 @@ import shutil
 def obj_dict(obj):
     return obj.__dict__
 
+# Initialize Counter
+total_counter = 0
+
 # define the writing time
-startTime = datetime.time(12, 0, 0)
-endTime = datetime.time(13, 10, 0)
+#startTime = datetime.time(12, 0, 0)
+#endTime = datetime.time(13, 10, 0)
 
 # Credentials and Firestore Reference
-cred = credentials.Certificate('Key/ServiceAccountKey.json')
-app = firebase_admin.initialize_app(cred)
+# cred = credentials.Certificate('Key/ServiceAccountKey.json')
+# app = firebase_admin.initialize_app(cred)
 
-db = firestore.client()
-doc_ref = db.collection(u'Emails')
+# db = firestore.client()
+# doc_ref = db.collection(u'Emails')
 
 # Negative Email Endings
 negatives = ['domain.net','group.calendar.google','youremail.com','sample.com','yoursite.com','internet.com','companysite.com','sentry.io','domain.xxx','sentry.wixpress.com', 'example.com', 'domain.com', 'address.com', 'xxx.xxx', 'email.com', 'yourdomain.com', 'godaddy.com']
@@ -34,29 +37,29 @@ negatives = ['domain.net','group.calendar.google','youremail.com','sample.com','
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
 
 # function that compares the given time against start and end
-def isOpen(startTime, endTime):
-    x = datetime.datetime.now().time()
-    if startTime <= endTime:
-        return startTime <= x <= endTime
-    else:
-        return startTime <= x or x <= endTime
+# def isOpen(startTime, endTime):
+#     x = datetime.datetime.now().time()
+#     if startTime <= endTime:
+#         return startTime <= x <= endTime
+#     else:
+#         return startTime <= x or x <= endTime
 
 # Function to commit JSON in batches to firebase
-def commit_data(data):
-  n = 400
-  # List comprehension to break up into chunks
-  chunked_array = [data[i * n:(i + 1) * n] for i in range((len(data) + n - 1) // n )]
+# def commit_data(data):
+#   n = 400
+#   # List comprehension to break up into chunks
+#   chunked_array = [data[i * n:(i + 1) * n] for i in range((len(data) + n - 1) // n )]
 
-  for elem in chunked_array:
-    batch = db.batch()
+#   for elem in chunked_array:
+#     batch = db.batch()
 
-    for item in elem:
-      new_doc = doc_ref.document()
-      batch.set(new_doc, item)
-    print('------------------------')
-    print('COMMITING DATA')
-    print('------------------------')  
-    batch.commit()
+#     for item in elem:
+#       new_doc = doc_ref.document()
+#       batch.set(new_doc, item)
+#     print('------------------------')
+#     print('COMMITING DATA')
+#     print('------------------------')  
+#     batch.commit()
 
 def get_email(url):
 
@@ -101,9 +104,9 @@ def runtime(filepath):
     # Reads website column, initializes counter variable
     df = pd.read_csv(filepath)
     fileName = './Output/' + filepath[filepath.find('/Data/')+6:filepath.find('.csv')] + '-EMAILS.json'
-    total_counter = 0
     # Initialize final list
     final_list = []
+    global total_counter
 
     # Only appends businesses with valid email
     for index, row in df.iterrows():
