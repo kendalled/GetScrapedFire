@@ -125,7 +125,7 @@ def runtime(filepath):
         else:
           print('Not writing time')
 
-        if(len(final_list) >= 14):
+        if(len(final_list) >= 2000):
            # Writing to JSON
             with open(fileName, 'w') as f:
               json.dump(final_list, f, default=obj_dict, indent=2)
