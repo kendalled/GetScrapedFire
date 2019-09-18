@@ -6,6 +6,7 @@ from firebase_admin import credentials, firestore
 import json 
 from glob import glob
 import shutil
+import time
 
 # Credentials and Firestore Reference
 cred = credentials.Certificate('Key/ServiceAccountKey.json')
@@ -31,6 +32,7 @@ def commit_data(data):
     print('COMMITING DATA')
     print('------------------------')  
     batch.commit()
+    time.sleep(1)
 
 for file_name in glob('./Output/*.json'):
   with open(file_name, 'r') as f:
