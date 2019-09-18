@@ -9,7 +9,11 @@ import requests
 import re
 import pandas as pd
 from glob import glob
+import json
 
+# json function
+def obj_dict(obj):
+    return obj.__dict__
 
 # define the writing time
 startTime = datetime.time(6, 0, 0)
@@ -35,7 +39,7 @@ def isOpen(startTime, endTime, x):
     else:
         return startTime <= x or x <= endTime
 
-# function to commit in batches to firebase
+# TODO function to commit JSON in batches to firebase
 def commit_data(data):
   n = 400
   # List comprehension to break up into chunks
@@ -94,6 +98,7 @@ def runtime(filepath):
 
     # Reads website column, initializes counter variable
     df = pd.read_csv(filepath)
+    fileName = './Output/' + filepath[filepath.find('/Data/')+6:filepath.find('.csv')] + '-EMAILS.csv'
     total_counter = 0
     # Initialize final list
     final_list = []
@@ -114,19 +119,25 @@ def runtime(filepath):
 
             total_counter += len(email)
             
-        if (isOpen(startTime, endTime, currentTime) and len(final_list) >= 400):
+        if isOpen(startTime, endTime, currentTime):
           commit_data(final_list)
           final_list = []
         else:
           print('Not writing time')
+
+        if(len(final_list) >= 14):
+           # Writing to JSON
+            with open(fileName, 'w') as f:
+              json.dump(final_list, f, default=obj_dict, indent=2)
           
         # Printing Status
         print('------------------------')
         print(str(total_counter) + ' Email(s) found so far.')
         print(str(len(final_list)) + ' is the final list length.')
         print('------------------------')
+    
 
-    print('File written! Kendall is the best. On to the next state!')
+    print('File written! Kendall is the best. On to the next city!')
 
 for entry in glob('./Data/*.csv'):
     try:
