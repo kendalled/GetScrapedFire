@@ -32,15 +32,11 @@ def commit_data(data):
     print('------------------------')  
     batch.commit()
 
-# for file_name in glob('./Output/*.json'):
-#       with open(file_name, 'r') as f:
-#         data = json.load(f)
-#         print(file_name)
-#         commit_data(data)
-#         # Move a file from the directory d1 to d2
-#         shutil.move(file_name, './Done/')
-
 for file_name in glob('./Output/*.json'):
-      with open(file_name, 'r') as f:
-        # Move a file from the directory d1 to d2
-        shutil.move(file_name, './Done/')
+  with open(file_name, 'r') as f:
+    data = json.load(f)
+    print(file_name)
+    commit_data(data)
+    # Move a file from the directory d1 to d2
+    shutil.move(file_name, './Uploaded/')
+

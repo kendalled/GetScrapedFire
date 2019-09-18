@@ -10,6 +10,7 @@ import re
 import pandas as pd
 from glob import glob
 import json
+import shutil
 
 # json function
 def obj_dict(obj):
@@ -107,8 +108,6 @@ def runtime(filepath):
     # Only appends businesses with valid email
     for index, row in df.iterrows():
         email = get_email(row['website'])
-        # Getting current time
-        currentTime = datetime.datetime.now().time()
         if(email):
             currentDT = datetime.datetime.now()
  
@@ -129,24 +128,24 @@ def runtime(filepath):
         # Printing Status
         print('------------------------')
         print(str(total_counter) + ' Email(s) found so far.')
-        print(str(len(final_list)) + ' is the final list length.')
         print('------------------------')
     
 
     print('File written! Kendall is the best. On to the next city!')
 
 for entry in glob('./Data/*.csv'):
-  if isOpen(startTime, endTime):
-    for file_name in glob('./Output/*.json'):
-      with open(file_name, 'r') as f:
-        data = json.load(f)
-        print(file_name)
-        commit_data(data)
-  else:
-    print('Not writing time')
+  # if isOpen(startTime, endTime):
+  #   for file_name in glob('./Output/*.json'):
+  #     with open(file_name, 'r') as f:
+  #       data = json.load(f)
+  #       print(file_name)
+  #       commit_data(data)
+  # else:
+  #   print('Not writing time')
   # Actual Scraping
   try:
     runtime(entry)
+    shutil.move(entry, './CompletedCSV/')
   except KeyboardInterrupt:
     continue
 
