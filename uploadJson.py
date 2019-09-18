@@ -5,6 +5,7 @@ import google.cloud
 from firebase_admin import credentials, firestore
 import json 
 from glob import glob
+import shutil
 
 # Credentials and Firestore Reference
 cred = credentials.Certificate('Key/ServiceAccountKey.json')
@@ -31,6 +32,15 @@ def commit_data(data):
     print('------------------------')  
     batch.commit()
 
-with open('./Output/testdata-EMAILS.json', 'r') as f:
-  data = json.load(f)
-  commit_data(data)
+# for file_name in glob('./Output/*.json'):
+#       with open(file_name, 'r') as f:
+#         data = json.load(f)
+#         print(file_name)
+#         commit_data(data)
+#         # Move a file from the directory d1 to d2
+#         shutil.move(file_name, './Done/')
+
+for file_name in glob('./Output/*.json'):
+      with open(file_name, 'r') as f:
+        # Move a file from the directory d1 to d2
+        shutil.move(file_name, './Done/')

@@ -33,7 +33,8 @@ negatives = ['domain.net','group.calendar.google','youremail.com','sample.com','
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
 
 # function that compares the given time against start and end
-def isOpen(startTime, endTime, x):
+def isOpen(startTime, endTime):
+    x = datetime.datetime.now().time()
     if startTime <= endTime:
         return startTime <= x <= endTime
     else:
@@ -135,10 +136,11 @@ def runtime(filepath):
     print('File written! Kendall is the best. On to the next city!')
 
 for entry in glob('./Data/*.csv'):
-  if isOpen(startTime, endTime, currentTime):
+  if isOpen(startTime, endTime):
     for file_name in glob('./Output/*.json'):
       with open(file_name, 'r') as f:
         data = json.load(f)
+        print(file_name)
         commit_data(data)
   else:
     print('Not writing time')
