@@ -107,7 +107,10 @@ def runtime(filepath):
 
     # Only appends businesses with valid email
     for index, row in df.iterrows():
-        email = get_email(row['website'])
+        try:
+          email = get_email(row['website'])
+        except KeyboardInterrupt:
+          continue
         if(email):
             currentDT = datetime.datetime.now()
  
@@ -145,10 +148,7 @@ for entry in glob('./Data/*.csv'):
   # else:
   #   print('Not writing time')
   # Actual Scraping
-  try:
-    runtime(entry)
-    shutil.move(entry, './CompletedCSV/')
-  except KeyboardInterrupt:
-    continue
+  runtime(entry)
+  shutil.move(entry, './CompletedCSV/')
 
 print('Finished all files.')
