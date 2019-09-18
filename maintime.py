@@ -9,7 +9,7 @@ import requests
 import re
 import pandas as pd
 from glob import glob
-import time
+
 
 # define the writing time
 startTime = datetime.time(6, 0, 0)
@@ -51,7 +51,6 @@ def commit_data(data):
     print('COMMITING DATA')
     print('------------------------')  
     batch.commit()
-    time.sleep(1)
 
 def get_email(url):
 
@@ -136,4 +135,3 @@ for entry in glob('./Data/*.csv'):
       continue
 
 print('Finished all files.')
-
