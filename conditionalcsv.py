@@ -1,4 +1,9 @@
-with open('onlyrugs.csv', 'r') as fin, open('onlypricedrugs.csv', 'w', newline='') as fout:
+import csv
+
+def is_texas(row):
+  return row[13] == 'TX'
+
+with open('waybetterfiredept.csv', 'r') as fin, open('onlyTXFire.csv', 'w', newline='') as fout:
 
     # define reader and writer objects
     reader = csv.reader(fin, skipinitialspace=True)
@@ -8,8 +13,10 @@ with open('onlyrugs.csv', 'r') as fin, open('onlypricedrugs.csv', 'w', newline='
     writer.writerow(next(reader))
 
     # iterate and write rows based on condition
-    for i in reader:
-      if(contains_sku(i[2])):
-        writer.writerow(i)
+    for row in reader:
+      # print(row[13])
+      if(is_texas(row)):
+        writer.writerow(row)
       else:
-        print('skipped: ' + i[2])
+        print('skipped one!')
+
