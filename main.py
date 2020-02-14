@@ -31,7 +31,6 @@ def get_email(url):
         print('filtering...')
         return not (x[ind:] in negatives)
 
-
     # Get HTML, regexp match, filter out bad emails
     try:
 
