@@ -70,7 +70,7 @@ def runtime():
   for elem in partial_links:
     urls.append('https://www.policeone.com/law-enforcement-directory/police-departments/' + elem)
   
-  for url in urls[:301]:
+  for url in urls[301:]:
     data.append(get_name_address(url))
     time.sleep(1)
 

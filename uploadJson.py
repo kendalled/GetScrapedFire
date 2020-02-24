@@ -13,7 +13,7 @@ cred = credentials.Certificate('Key/ServiceAccountKey.json')
 app = firebase_admin.initialize_app(cred)
 
 db = firestore.client()
-doc_ref = db.collection(u'Emails')
+doc_ref = db.collection(u'items')
 
 # Function to commit JSON in batches to firebase
 def commit_data(data):

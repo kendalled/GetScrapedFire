@@ -1,0 +1,17 @@
+{
+          "title": "Billiards Tables",
+          "features": ["Professional quality", "5 year limited warranty", "Customizable felt colors", "Dining top available"],
+          "link": "https://pooltablestore.com/tables-1/",
+          "page": {
+            "ind": 0,
+            "pid": "p0",
+            "active": true,
+            "title": "pac-man",
+            "data":
+          [
+            "~/static/poolnewnew.png",
+            "~/static/poolnew2.png",
+            "~/static/poolnew3.png"
+          ]
+          }
+        }
