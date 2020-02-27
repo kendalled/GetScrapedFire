@@ -37,7 +37,7 @@ def get_name_address(url):
     else:
         res.remove(res[0])
         res.insert(0, res2)
-        if (res[3] != 'Texas'):
+        if (res[3] != 'California' and res[3] != 'california'):
           res = res[:3] + res[4:]
         print('Station Data:\n')
         print(res[:res.index('Police Departments')-2])
@@ -74,7 +74,7 @@ def runtime():
     data.append(get_name_address(url))
     time.sleep(1)
 
-  with open('./texasPD.csv', 'ab') as csvfile:
+  with open('./CaliPD2.csv', 'ab') as csvfile:
     fieldnames = ['station_name', 'address1', 'city', 'state', 'zip']
     writer = csv.DictWriter(csvfile, fieldnames = fieldnames, quoting=csv.QUOTE_ALL)
     writer.writeheader()
