@@ -1,10 +1,14 @@
 import csv
 
-def is_texas(row):
-  return row[13] == 'TX'
+def is_state(row, state):
+  return row[13] == state
 
-with open('waybetterfiredept.csv', 'r') as fin, open('onlyTXFire.csv', 'w', newline='') as fout:
+def is_not_volunteer(row):
+  print(row[18])
+  return(row[18] != 'Volunteer')
 
+with open('waybetterfiredept.csv', 'r') as fin, open('onlyCAFire.csv', 'w', newline='') as fout:
+    state = 'CA'
     # define reader and writer objects
     reader = csv.reader(fin, skipinitialspace=True)
     writer = csv.writer(fout, delimiter=',', quoting=csv.QUOTE_ALL)
@@ -15,7 +19,7 @@ with open('waybetterfiredept.csv', 'r') as fin, open('onlyTXFire.csv', 'w', newl
     # iterate and write rows based on condition
     for row in reader:
       # print(row[13])
-      if(is_texas(row)):
+      if(is_state(row, state) and is_not_volunteer(row)):
         writer.writerow(row)
       else:
         print('skipped one!')

@@ -88,7 +88,7 @@ def get_name_address(url):
 def runtime():
   urls = []
   data = []
-  with open(r'./Data/saved2.html', "r") as f:
+  with open(r'./Data/biz1.html', "r") as f:
     page = f.read()
     partial_links = re.findall(r'href="/(.+?)"', page)
     print('Fetched Links.\n')
@@ -101,7 +101,7 @@ def runtime():
     data.append(get_name_address(url))
     time.sleep(1)
 
-  with open('./corp4.csv', 'ab') as csvfile:
+  with open('./corpL.csv', 'ab') as csvfile:
     fieldnames = ['business_name', 'address1', 'city', 'state', 'zip']
     writer = csv.DictWriter(csvfile, fieldnames = fieldnames, quoting=csv.QUOTE_ALL)
     writer.writeheader()
