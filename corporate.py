@@ -101,7 +101,7 @@ def runtime():
     data.append(get_name_address(url))
     time.sleep(1)
 
-  with open('./corpP.csv', 'ab') as csvfile:
+  with open('./corpW.csv', 'ab') as csvfile:
     fieldnames = ['business_name', 'address1', 'city', 'state', 'zip']
     writer = csv.DictWriter(csvfile, fieldnames = fieldnames, quoting=csv.QUOTE_ALL)
     writer.writeheader()

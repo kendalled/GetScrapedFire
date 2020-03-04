@@ -7,8 +7,8 @@ def is_not_volunteer(row):
   print(row[18])
   return(row[18] != 'Volunteer')
 
-with open('waybetterfiredept.csv', 'r') as fin, open('onlyCAFire.csv', 'w', newline='') as fout:
-    state = 'CA'
+with open('waybetterfiredept.csv', 'r') as fin, open('onlyFLFire.csv', 'w', newline='') as fout:
+    state = 'FL'
     # define reader and writer objects
     reader = csv.reader(fin, skipinitialspace=True)
     writer = csv.writer(fout, delimiter=',', quoting=csv.QUOTE_ALL)
